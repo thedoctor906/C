@@ -1,0 +1,103 @@
+#include<stdio.h>
+
+
+void print_menu(double exchange_rate);
+int read_choice(void);
+void cases_choice(int n, double exchange_rate);
+double set_exchange_rate(void);
+void convert_prices(double n);
+
+
+
+
+int main(void){
+  int choice;
+  double exchange_rate = 1;
+
+  print_menu(exchange_rate);
+  choice = read_choice();
+  cases_choice(choice, exchange_rate);
+
+system("pause > NULL");
+return 0;
+}
+
+
+
+/* Beskrivning: Skriver ut menyn.
+ * Input:       Växlingskursen.
+ * Output:      Returnerar inget. Skriver ut menyn.
+ */
+void print_menu(double exchange_rate){
+  printf("\n1. Set exchange rate in SEK");
+  printf("(current rate: %.f)\n", exchange_rate);
+  printf("2. Convert prices from the foreign currency\n");
+  printf("3. End\n\n");
+}
+
+/* Beskrivning: Läser in val från menyn.
+ * Input:       1-3.
+ * Output:      Valet från menyn.
+ */
+ int read_choice(void){
+   int n;
+   scanf("%d", &n);
+   return n;
+ }
+
+ /* Beskrivning: Vidarbefodrar användaren till rätt funktion beroende på tidigare val.
+  * Input:       Beroende på tidigare val.
+  * Output:      Beroende på tidigare val.
+  */
+void cases_choice(int n, double exchange_rate){
+  switch (n)
+  {
+    case 1:
+      exchange_rate = set_exchange_rate();
+      break;
+    case 2:
+      convert_prices(exchange_rate) ;
+      break;
+    case 3:
+      //Avsluta program//;
+      break;
+    default: printf("Not a valid choice!1\n"); break;
+  }
+}
+
+
+
+
+ /* Beskrivning: Läser in exchange rate.
+  * Input:       Alla tal > 0.
+  * Output:      Satt exchange rate.
+  */
+
+double set_exchange_rate(void){
+
+  double n;
+  printf("Give exchange rate: ");
+  scanf("%lf",&n);
+  return n;
+}
+
+/* Beskrivning: Läser in priser, konverterar priset till utländsk valuta och skriver ut det totala priset.
+ * Input:       Alla tal > 0.
+ * Output:      Ingen.
+ */
+
+void convert_prices(double n){
+
+  double sum = 0, a;
+
+    do{
+      printf("\nGive price (finish with < 0): ");
+      scanf("%lf",&a);
+      printf("\n");
+        if(a>0){
+          sum = sum + a;
+        }
+      } while(a>0);
+  printf("Sum in foreign currency: %.2lf \n", sum);
+  printf("Sum in SEK: %.2lf \n", sum * n);
+}
